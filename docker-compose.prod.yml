@@ -11,8 +11,8 @@ services:
       - NODE_ENV=production
       - PORT=4000
       - MONGO_URI=mongodb://mongo:27017/daybook
-      - JWT_SECRET=your-secret-key
-      - FRONTEND_URL=${FRONTEND_URL:-https://hai.ttmmo.com}
+      - JWT_SECRET=your-production-secret-key
+      - FRONTEND_URL=https://hai.ttmmo.com
     depends_on:
       - mongo
 
@@ -20,14 +20,13 @@ services:
     build: 
       context: ./frontend
       args:
-        - VITE_BACKEND_URL=${VITE_BACKEND_URL:-https://api.ttmmo.com}
+        - VITE_BACKEND_URL=https://api.ttmmo.com
     container_name: daybook-frontend
     restart: always
     ports:
-      - "8080:80"   # bên ngoài 8080, bên trong nginx chạy 80
+      - "8080:80"
     depends_on:
       - backend
-
 
   mongo:
     image: mongo:5
@@ -35,9 +34,6 @@ services:
     restart: always
     volumes:
       - mongo_data:/data/db
-    # không cần public port nếu chỉ backend dùng
-    # ports:
-    #   - "27017:27017"
 
 volumes:
   mongo_data:
