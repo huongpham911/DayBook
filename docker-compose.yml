@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./backend
+    container_name: daybook-backend
+    restart: always
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=production
+      - MONGO_URI=mongodb://mongo:27017/daybook
+      - JWT_SECRET=your-secret-key
+    depends_on:
+      - mongo
+
+  frontend:
+    build: ./frontend
+    container_name: daybook-frontend
+    restart: always
+    ports:
+      - "80:80"   # chỉ expose 80
+    depends_on:
+      - backend
+    environment:
+      - REACT_APP_API_URL=http://backend:4000
+
+  mongo:
+    image: mongo:5
+    container_name: daybook-mongo
+    restart: always
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27017:27017"
+
+volumes:
+  mongo_data:
