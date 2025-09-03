@@ -34,6 +34,19 @@ const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const entryRoutes = require("./routes/entryRoutes");
 
+// Health check endpoint
+app.get("/", (req, res) => {
+  res.json({ 
+    message: "DayBook API is running", 
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || 'development'
+  });
+});
+
+app.get("/health", (req, res) => {
+  res.json({ status: "OK", timestamp: new Date().toISOString() });
+});
+
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/entries", entryRoutes);
