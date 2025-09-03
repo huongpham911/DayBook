@@ -17,11 +17,11 @@ services:
     container_name: daybook-frontend
     restart: always
     ports:
-      - "8080:80"   # dùng 8080 thay vì 80 hoặc 3000
+      - "8080:80"   # bên ngoài 8080, bên trong nginx chạy 80
     depends_on:
       - backend
     environment:
-      - REACT_APP_API_URL=http://backend:4000
+      - REACT_APP_API_URL=https://api.ttmmo.com  # trỏ ra backend domain
 
   mongo:
     image: mongo:5
@@ -29,8 +29,9 @@ services:
     restart: always
     volumes:
       - mongo_data:/data/db
-    # không publish port để tránh lộ DB
-    # nếu muốn debug có thể mở: "27017:27017"
+    # không cần public port nếu chỉ backend dùng
+    # ports:
+    #   - "27017:27017"
 
 volumes:
   mongo_data:
