@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   backend:
     build: ./backend
@@ -19,7 +17,7 @@ services:
     container_name: daybook-frontend
     restart: always
     ports:
-      - "80:80"   # chỉ expose 80
+      - "8080:80"   # dùng 8080 thay vì 80 hoặc 3000
     depends_on:
       - backend
     environment:
@@ -31,8 +29,8 @@ services:
     restart: always
     volumes:
       - mongo_data:/data/db
-    ports:
-      - "27017:27017"
+    # không publish port để tránh lộ DB
+    # nếu muốn debug có thể mở: "27017:27017"
 
 volumes:
   mongo_data:
