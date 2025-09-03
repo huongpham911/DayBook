@@ -1,0 +1,3 @@
+[33m374d6c8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m FINAL FIX: Resolve Docker CMD and nginx config issues - Backend and Frontend working
+[33m61ace81[m Fix 404 errors: Add health check routes and nginx SPA config
+[33m2d4de08[m Fix production deployment: Configure CORS for hai.ttmmo.com and api.ttmmo.com
