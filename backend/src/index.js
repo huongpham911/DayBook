@@ -17,11 +17,13 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/entries", entryRoutes);
 
+const PORT = process.env.PORT || 4000;
+
 connectDB()
   .then(() => {
     console.log("Database connected successfully!");
-    app.listen(process.env.PORT, () => {
-      console.log(`Server is running on port ${process.env.PORT}!`);
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}!`);
     });
   })
   .catch((error) => {
